@@ -25,10 +25,10 @@ exports.getFinancialAdvisorById = async (req, res) => {
 
 exports.createFinancialAdvisor = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { firstName, email } = req.body;
 
     const hashedPassword = await bcrypt.hash(email, 12);
-    const newUser = await User.create({ name, email, password: hashedPassword });
+    const newUser = await User.create({ name:firstName, email, password: hashedPassword });
     
     const newAdvisor = await FinancialAdvisor.create(req.body);
     res.status(201).json(newAdvisor);
