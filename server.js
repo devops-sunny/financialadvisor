@@ -44,6 +44,11 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const parentCategoryRoutes = require('./routes/parentCategoryRoutes');
 const meetingRoutes = require('./routes/meetingRoutes');
+const faqRoutes = require('./routes/faqRoutes');
+const termsConditionsRoutes = require('./routes/termsConditionsRoutes');
+const privacyPolicyRoutes = require('./routes/privacyPolicyRoutes');
+
+
 
 const path = require("path");
 
@@ -55,6 +60,9 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/parentCategories', parentCategoryRoutes);
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/meetings', meetingRoutes);
+app.use('/api/faqs', faqRoutes);
+app.use('/api/terms-conditions', termsConditionsRoutes);
+app.use('/api/privacy-policy', privacyPolicyRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use("/", express.static("client/build"));
