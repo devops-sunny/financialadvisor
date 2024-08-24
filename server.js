@@ -60,9 +60,9 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/parentCategories', parentCategoryRoutes);
 app.use('/api/appointments', appointmentRoutes);
 app.use('/api/meetings', meetingRoutes);
-app.use('/api/faqs', faqRoutes);
-app.use('/api/terms-conditions', termsConditionsRoutes);
-app.use('/api/privacy-policy', privacyPolicyRoutes);
+app.use('/api/faq', faqRoutes);
+app.use('/api/terms', termsConditionsRoutes);
+app.use('/api/privacy', privacyPolicyRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use("/", express.static("client/build"));
