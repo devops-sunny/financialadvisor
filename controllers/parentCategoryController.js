@@ -6,7 +6,7 @@ exports.getAllParentCategories = async (req, res) => {
     const parentCategories = await ParentCategory.find();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       parentCategories
     );
   } catch (err) {
@@ -21,7 +21,7 @@ exports.getParentCategoryById = async (req, res) => {
       return res.status(404).json({ message: "ParentCategory not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       parentCategory
     );
   } catch (err) {
@@ -41,7 +41,7 @@ exports.createParentCategory = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newParentCategory
     );
   } catch (err) {
@@ -60,7 +60,7 @@ exports.updateParentCategory = async (req, res) => {
       return res.status(404).json({ message: "ParentCategory not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedParentCategory
     );
   } catch (err) {
@@ -77,7 +77,7 @@ exports.deleteParentCategory = async (req, res) => {
       return res.status(404).json({ message: "ParentCategory not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

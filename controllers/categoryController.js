@@ -7,7 +7,7 @@ exports.getAllCategories = async (req, res) => {
     const categories = await Category.find()
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       categories
     );
   } catch (err) {
@@ -22,7 +22,7 @@ exports.getCategoryById = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       category
     );
   } catch (err) {
@@ -43,7 +43,7 @@ exports.createCategory = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newCategory
     );
   } catch (err) {
@@ -57,7 +57,7 @@ exports.updateCategory = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedCategory
     );
   } catch (err) {
@@ -71,7 +71,7 @@ exports.deleteCategory = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.DELETED,
     );    
 
   } catch (err) {
@@ -83,13 +83,11 @@ exports.deleteCategory = async (req, res) => {
 exports.getCategoriesByParent = async (req, res) => {
   try {
     const categories = await Category.find({parentCategory:req.params.id });
-  
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       categories
     );    
-
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

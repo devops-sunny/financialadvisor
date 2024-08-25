@@ -6,7 +6,7 @@ exports.getAllProducts = async (req, res) => {
     const products = await Product.find().populate("category subCategory");
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       products
     );
   } catch (err) {
@@ -22,7 +22,7 @@ exports.getProductById = async (req, res) => {
     if (!product) return res.status(404).json({ message: "Product not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       product
     );
   } catch (err) {
@@ -40,7 +40,7 @@ exports.createProduct = async (req, res) => {
     const newProduct = await Product.create(productData);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newProduct
     );
   } catch (err) {
@@ -57,7 +57,7 @@ exports.updateProduct = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedProduct
     );
   } catch (err) {
@@ -70,7 +70,7 @@ exports.deleteProduct = async (req, res) => {
     await Product.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

@@ -7,7 +7,7 @@ exports.getAllFinancialAdvisors = async (req, res) => {
     const advisors = await FinancialAdvisor.find().populate("userId");
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       advisors
     );
   } catch (err) {
@@ -24,7 +24,7 @@ exports.getFinancialAdvisorById = async (req, res) => {
       return res.status(404).json({ message: "Financial Advisor not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       advisor
     );
   } catch (err) {
@@ -46,7 +46,7 @@ exports.createFinancialAdvisor = async (req, res) => {
     });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newAdvisor
     );
   } catch (err) {
@@ -63,7 +63,7 @@ exports.updateFinancialAdvisor = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedAdvisor
     );
   } catch (err) {
@@ -76,7 +76,7 @@ exports.deleteFinancialAdvisor = async (req, res) => {
     await FinancialAdvisor.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

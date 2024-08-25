@@ -8,7 +8,7 @@ exports.getAllMeetings = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       meetings
     );
   } catch (err) {
@@ -25,7 +25,7 @@ exports.getMeetingById = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       meeting
     );
   } catch (err) {
@@ -39,7 +39,7 @@ exports.createMeeting = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newMeeting
     );
   } catch (err) {
@@ -56,7 +56,7 @@ exports.updateMeeting = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedMeeting
     );
   } catch (err) {
@@ -69,7 +69,7 @@ exports.deleteMeeting = async (req, res) => {
     await Meeting.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

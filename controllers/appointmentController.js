@@ -8,7 +8,7 @@ exports.getAllAppointments = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       appointments
     );
   } catch (err) {
@@ -27,7 +27,7 @@ exports.getAppointmentById = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       appointment
     );
    } catch (err) {
@@ -43,7 +43,7 @@ exports.createAppointment = async (req, res) => {
 
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newAppointment
     );
   } catch (err) {
@@ -113,12 +113,10 @@ exports.updateAppointment = async (req, res) => {
       },
       { new: true }
     );
-
-
     
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedAppointment
     );
   } catch (error) {
@@ -129,13 +127,10 @@ exports.updateAppointment = async (req, res) => {
 
 exports.deleteAppointment = async (req, res) => {
   try {
-    await Appointment.findByIdAndDelete(req.params.id);
-
-    
+    await Appointment.findByIdAndDelete(req.params.id);  
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
-      
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

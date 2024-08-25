@@ -5,7 +5,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.find();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       users
     );
   } catch (err) {
@@ -19,7 +19,7 @@ exports.getUserById = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       user
     );
   } catch (err) {
@@ -34,7 +34,7 @@ exports.updateUser = async (req, res) => {
     });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedUser
     );
   } catch (err) {
@@ -47,7 +47,7 @@ exports.deleteUser = async (req, res) => {
     await User.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

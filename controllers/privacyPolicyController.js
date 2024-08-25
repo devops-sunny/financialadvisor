@@ -6,7 +6,7 @@ exports.createPrivacyPolicy = async (req, res) => {
     await newPrivacyPolicy.save();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newPrivacyPolicy
     );
   } catch (err) {
@@ -19,7 +19,7 @@ exports.getAllPrivacyPolicies = async (req, res) => {
     const privacyPolicies = await PrivacyPolicyModel.find();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       privacyPolicies
     );
   } catch (err) {
@@ -34,7 +34,7 @@ exports.getPrivacyPolicyById = async (req, res) => {
       return res.status(404).json({ message: "Privacy Policy not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,     
       privacyPolicy
     );
   } catch (err) {
@@ -51,7 +51,7 @@ exports.updatePrivacyPolicy = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedPrivacyPolicy
     );
   } catch (err) {
@@ -64,7 +64,7 @@ exports.deletePrivacyPolicy = async (req, res) => {
     await PrivacyPolicyModel.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

@@ -6,7 +6,7 @@ exports.createTermsConditions = async (req, res) => {
     await newTermsConditions.save();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newTermsConditions
     );
   } catch (err) {
@@ -19,7 +19,7 @@ exports.getAllTermsConditions = async (req, res) => {
     const termsConditions = await TermsConditionsModel.find();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       termsConditions
     );
   } catch (err) {
@@ -34,7 +34,7 @@ exports.getTermsConditionsById = async (req, res) => {
       return res.status(404).json({ message: "Terms & Conditions not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       termsConditions
     );
   } catch (err) {
@@ -51,7 +51,7 @@ exports.updateTermsConditions = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedTermsConditions
     );
   } catch (err) {
@@ -64,7 +64,7 @@ exports.deleteTermsConditions = async (req, res) => {
     await TermsConditionsModel.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });

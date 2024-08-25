@@ -6,7 +6,7 @@ exports.createFAQ = async (req, res) => {
     await newFAQ.save();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.ADDED,
       newFAQ
     );
   } catch (err) {
@@ -19,7 +19,7 @@ exports.getAllFAQs = async (req, res) => {
     const faqs = await FaqModel.find();
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       faqs
     );
   } catch (err) {
@@ -33,7 +33,7 @@ exports.getFAQById = async (req, res) => {
     if (!faq) return res.status(404).json({ message: "FAQ not found" });
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.LIST,
       faq
     );
   } catch (err) {
@@ -50,7 +50,7 @@ exports.updateFAQ = async (req, res) => {
     );
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS,
+      STATUS_MESSAGES.REQUEST.UPDATED,
       updatedFAQ
     );
   } catch (err) {
@@ -63,7 +63,7 @@ exports.deleteFAQ = async (req, res) => {
     await FaqModel.findByIdAndDelete(req.params.id);
     return res.handler.response(
       STATUS_CODES.SUCCESS,
-      STATUS_MESSAGES.LOGIN_SUCCESS
+      STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
     res.status(400).json({ error: err.message });
