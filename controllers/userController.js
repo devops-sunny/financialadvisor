@@ -1,9 +1,13 @@
-const User = require('../models/userModel');
+const User = require("../models/userModel");
 
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
-    res.status(200).json(users);
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      users
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -12,8 +16,12 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
-    res.status(200).json(user);
+    if (!user) return res.status(404).json({ message: "User not found" });
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      user
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -21,8 +29,14 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json(updatedUser);
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      updatedUser
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -31,7 +45,10 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'User deleted successfully' });
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

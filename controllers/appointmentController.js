@@ -1,7 +1,4 @@
 const Appointment = require("../models/appointmentModel");
-const User = require("../models/userModel");
-const FinancialAdvisor = require("../models/financialAdvisorModel");
-const { sendNotification } = require("../utils/notificationUtils");
 const Meeting = require("../models/meetingModel");
 
 exports.getAllAppointments = async (req, res) => {
@@ -9,7 +6,11 @@ exports.getAllAppointments = async (req, res) => {
     const appointments = await Appointment.find().populate(
       "userId productId financialAdvisorId"
     );
-    res.status(200).json(appointments);
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      appointments
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -22,8 +23,14 @@ exports.getAppointmentById = async (req, res) => {
     );
     if (!appointment)
       return res.status(404).json({ message: "Appointment not found" });
-    res.status(200).json(appointment);
-  } catch (err) {
+
+
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      appointment
+    );
+   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
@@ -34,7 +41,11 @@ exports.createAppointment = async (req, res) => {
       req.body;
     const newAppointment = await Appointment.create(req.body);
 
-    res.status(201).json(newAppointment);
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      newAppointment
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -103,7 +114,13 @@ exports.updateAppointment = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json(updatedAppointment);
+
+    
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      updatedAppointment
+    );
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -113,7 +130,13 @@ exports.updateAppointment = async (req, res) => {
 exports.deleteAppointment = async (req, res) => {
   try {
     await Appointment.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Appointment deleted successfully" });
+
+    
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

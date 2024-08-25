@@ -1,9 +1,16 @@
-const Meeting = require('../models/meetingModel');
+const Meeting = require("../models/meetingModel");
 
 exports.getAllMeetings = async (req, res) => {
   try {
-    const meetings = await Meeting.find().populate('appointmentId userId financialAdvisorId productId');
-    res.status(200).json(meetings);
+    const meetings = await Meeting.find().populate(
+      "appointmentId userId financialAdvisorId productId"
+    );
+
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      meetings
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -11,9 +18,16 @@ exports.getAllMeetings = async (req, res) => {
 
 exports.getMeetingById = async (req, res) => {
   try {
-    const meeting = await Meeting.findById(req.params.id).populate('appointmentId userId financialAdvisorId productId');
-    if (!meeting) return res.status(404).json({ message: 'Meeting not found' });
-    res.status(200).json(meeting);
+    const meeting = await Meeting.findById(req.params.id).populate(
+      "appointmentId userId financialAdvisorId productId"
+    );
+    if (!meeting) return res.status(404).json({ message: "Meeting not found" });
+
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      meeting
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -22,7 +36,12 @@ exports.getMeetingById = async (req, res) => {
 exports.createMeeting = async (req, res) => {
   try {
     const newMeeting = await Meeting.create(req.body);
-    res.status(201).json(newMeeting);
+
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      newMeeting
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -30,8 +49,16 @@ exports.createMeeting = async (req, res) => {
 
 exports.updateMeeting = async (req, res) => {
   try {
-    const updatedMeeting = await Meeting.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.status(200).json(updatedMeeting);
+    const updatedMeeting = await Meeting.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      updatedMeeting
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -40,7 +67,10 @@ exports.updateMeeting = async (req, res) => {
 exports.deleteMeeting = async (req, res) => {
   try {
     await Meeting.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Meeting deleted successfully' });
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS
+    );
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
