@@ -7,9 +7,16 @@ exports.signup = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = await User.create({ name, email, password: hashedPassword });
-    res.status(201).json({ message: 'User created successfully', user: newUser });
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      {
+        user: newUser 
+      }
+    );
+
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    return res.handler.response(STATUS_CODES.SERVER_ERROR);
   }
 };
 
@@ -23,8 +30,15 @@ exports.login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
     
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.status(200).json({ token, user });
+    return res.handler.response(
+      STATUS_CODES.SUCCESS,
+      STATUS_MESSAGES.LOGIN_SUCCESS,
+      {
+        token, user 
+      }
+    );
+
   } catch (err) {
-    res.status(400).json({ error: err.message });
+     return res.handler.response(STATUS_CODES.SERVER_ERROR);
   }
 };

@@ -7,10 +7,45 @@ const swaggerUi = require('swagger-ui-express');
 const postmanToOpenApi = require('postman-to-openapi')
 const swaggerJson = require('./PostmanCollection.json');
 const cors = require('cors');
+const bodyParser = require("body-parser"); 
+require("./config/responseHandler");
+require("./config/globals");
 
 
-app.use(cors());
+const path = require("path");
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(cors()); 
 app.use(express.json());
+
+app.use((req, res, next) => {
+    res.handler = new ResponseHandler(req, res);
+    next();
+ });
+  
+
+ app.use((err, req, res, next) => {
+    if (res.headersSent) {
+      return next(err);
+    }
+    console.log("err", err);
+    res.handler.serverError(err);
+});
+  
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const financialAdvisorRoutes = require('./routes/financialAdvisorRoutes');
+const productRoutes = require('./routes/productRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
+const parentCategoryRoutes = require('./routes/parentCategoryRoutes');
+const meetingRoutes = require('./routes/meetingRoutes');
+const faqRoutes = require('./routes/faqRoutes');
+const termsConditionsRoutes = require('./routes/termsConditionsRoutes');
+const privacyPolicyRoutes = require('./routes/privacyPolicyRoutes');
+const ResponseHandler = require("./config/responseHandler");
+
 
 
 
@@ -36,21 +71,9 @@ app.get('/generate-yml', async (req, res) => {
     }
 });
 
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const financialAdvisorRoutes = require('./routes/financialAdvisorRoutes');
-const productRoutes = require('./routes/productRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const appointmentRoutes = require('./routes/appointmentRoutes');
-const parentCategoryRoutes = require('./routes/parentCategoryRoutes');
-const meetingRoutes = require('./routes/meetingRoutes');
-const faqRoutes = require('./routes/faqRoutes');
-const termsConditionsRoutes = require('./routes/termsConditionsRoutes');
-const privacyPolicyRoutes = require('./routes/privacyPolicyRoutes');
 
 
 
-const path = require("path");
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);

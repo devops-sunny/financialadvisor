@@ -1,5 +1,16 @@
 const ParentCategory = require('../models/parentCategoryModel');
 
+const generateUniqueId = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); 
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  return `PRC-${year}${month}${day}-${hours}${minutes}${seconds}`;
+};
+
 exports.getAllParentCategories = async (req, res) => {
   try {
     const parentCategories = await ParentCategory.find();
@@ -21,7 +32,14 @@ exports.getParentCategoryById = async (req, res) => {
 
 exports.createParentCategory = async (req, res) => {
   try {
-    const newParentCategory = await ParentCategory.create(req.body);
+
+    const uniqueId = generateUniqueId();
+    const ParentCategoryData = {
+      ...req.body,
+      Uniqueid: uniqueId
+    };
+
+    const newParentCategory = await ParentCategory.create(ParentCategoryData);
     res.status(201).json(newParentCategory);
   } catch (err) {
     res.status(400).json({ error: err.message });
