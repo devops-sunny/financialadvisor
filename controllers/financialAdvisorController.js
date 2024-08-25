@@ -26,11 +26,9 @@ exports.getFinancialAdvisorById = async (req, res) => {
 exports.createFinancialAdvisor = async (req, res) => {
   try {
     const { firstName, email } = req.body;
-
     const hashedPassword = await bcrypt.hash(email, 12);
-    const newUser = await User.create({ name:firstName, email, password: hashedPassword });
-    
     const newAdvisor = await FinancialAdvisor.create(req.body);
+    const newUser = await User.create({ name:firstName, email:email, password: hashedPassword , role:"FinancialAdviser" ,FinancialAdvisorid:newAdvisor._id});
     res.status(201).json(newAdvisor);
   } catch (err) {
     res.status(400).json({ error: err.message });

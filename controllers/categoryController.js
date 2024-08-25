@@ -1,15 +1,5 @@
+const { generateUniqueId } = require('../middlewares/generateUniqueId');
 const Category = require('../models/categoryModel');
-
-const generateUniqueId = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0'); 
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  return `CR-${year}${month}${day}-${hours}${minutes}${seconds}`;
-};
 
 
 exports.getAllCategories = async (req, res) => {
@@ -34,7 +24,7 @@ exports.getCategoryById = async (req, res) => {
 exports.createCategory = async (req, res) => {
   try {
 
-    const uniqueId = generateUniqueId();
+    const uniqueId = generateUniqueId('CR');
     const categoryData = {
       ...req.body,
       Uniqueid: uniqueId

@@ -1,16 +1,6 @@
+const { generateUniqueId } = require('../middlewares/generateUniqueId');
 const Product = require('../models/productModel');
 
-
-const generateUniqueId = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0'); 
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  return `PR-${year}${month}${day}-${hours}${minutes}${seconds}`;
-};
 
 exports.getAllProducts = async (req, res) => {
   try {
@@ -33,7 +23,7 @@ exports.getProductById = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   try {
-    const uniqueId = generateUniqueId();
+    const uniqueId = generateUniqueId("PR");
     const productData = {
       ...req.body,
       Uniqueid: uniqueId
