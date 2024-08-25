@@ -41,6 +41,41 @@
 					"response": []
 				},
 				{
+					"name": "update-password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Y2JjMzI0NTIzNzVhNGQ5MzQzZDJkYiIsImlhdCI6MTcyNDYyOTgzMSwiZXhwIjoxNzI0NjMzNDMxfQ.AcSNwdltH4_YpPEffDb2WmmA9-wpxvRosYfogR7ZLNk\",\n    \"newPassword\": \"newPassword123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/update-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login",
 					"request": {
 						"method": "POST",
@@ -52,7 +87,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"john@example.com\",\n\t\"password\": \"password123\"\n}"
+							"raw": "{\n\t\"email\": \"joh22n@example.com\",\n\t\"password\": \"newPassword123\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/api/auth/login",
@@ -65,6 +100,41 @@
 								"api",
 								"auth",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate-token-mail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"joh22n@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/generate-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"generate-token"
 							]
 						}
 					},
