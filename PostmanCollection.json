@@ -1,6 +1,5 @@
 {  
 	"swagger": "2.0",
-	"openapi": "3.0.0",
 	"info": {
 		"_postman_id": "19ea5166-c26e-48e3-bad1-ef160662a55b",
 		"name": "Complete API Collection",

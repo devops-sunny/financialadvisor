@@ -8,11 +8,7 @@ const privacyPolicySchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
-  },
-  effectiveDate: {
-    type: Date,
-    required: true,
-  },
+  }
 }, {
   timestamps: true,
 });

@@ -73,8 +73,6 @@ app.get('/generate-yml', async (req, res) => {
 
 
 
-
-
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/financialAdvisors', financialAdvisorRoutes);
@@ -94,7 +92,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client/build/index.html"));
   });
 }
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 
 app.get("/", (req, res) => res.send("Hello World!"));
 app.listen(port, () => console.log(`Node Express Server Started at ${port}!`));
