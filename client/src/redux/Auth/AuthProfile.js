@@ -6,6 +6,7 @@ const initialState = {
     token:"",
     role:"",
     id:"",
+    FinancialAdvisorid:"",
     payload:[],
 };
 
@@ -14,12 +15,14 @@ const AuthProfileSlice = createSlice({
     initialState,
     reducers: {
         AuthDetails: (state, action) => {
+            console.log(action?.payload)
             state.message = "";
             state.error = null;
-            state.token = action?.payload?.token;
-            state.role = action?.payload?.role;
-            state.id = action?.payload?.id;
+            state.token = action?.payload.data.token;
+            state.role = action?.payload?.data.user.role;
+            state.id =  action?.payload?.data.user._id;
             state.payload=action?.payload;
+            state.FinancialAdvisorid =  action?.payload?.data.user.FinancialAdvisorid;
         },
     },
 });

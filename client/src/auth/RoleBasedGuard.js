@@ -10,7 +10,7 @@ import { useAuthContext } from './useAuthContext';
 RoleBasedGuard.propTypes = {
   children: PropTypes.node,
   hasContent: PropTypes.bool,
-  roles: PropTypes.arrayOf(PropTypes.string),
+  roles: PropTypes.array,
 };
 
 export default function RoleBasedGuard({ hasContent, roles, children }) {

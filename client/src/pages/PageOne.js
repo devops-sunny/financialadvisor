@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import { Container, Typography } from '@mui/material';
 // components
 import { useSettingsContext } from '../components/settings';
-import { DialogAnimate } from '../components/animate';
 
 // ----------------------------------------------------------------------
 
@@ -18,8 +17,7 @@ export default function PageOne() {
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
 
-        <DialogAnimate open={false} >
-        <Typography variant="h3" component="h1" paragraph>
+      <Typography variant="h3" component="h1" paragraph>
           Page One
         </Typography>
 
@@ -40,8 +38,6 @@ export default function PageOne() {
           libero metus, condimentum nec, tempor a, commodo mollis, magna. In enim justo, rhoncus ut,
           imperdiet a, venenatis vitae, justo. Cras dapibus.
         </Typography>
-        </DialogAnimate>
-       
       </Container>
     </>
   );

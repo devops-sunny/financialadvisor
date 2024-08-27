@@ -1,5 +1,4 @@
 // eslint-disable-next-line no-use-before-define
-
 import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
 import {Navigate } from "react-router-dom";
@@ -9,21 +8,19 @@ const useAuth = () => {
   if (token) {
     return true;
   }
-
   return false;
-
 };
 
-export default function PublicRoutes({ children , paths }) {
+export default function PublicRoutes({ children  }) {
   const auth = useAuth();
   const role = useSelector((state) => state.Auth.role);
 
   if (auth) {
     if (role === "Admin") {
-      return <Navigate to="/Admin" />;
+      return <Navigate to="/dashboard" />;
     }
     if (role === "FinancialAdviser") {
-      return <Navigate to="/FinancialAdviser" />;
+      return <Navigate to="/FinancialAdviserDashboard" />;
     }
   } else {
     return <>{children}</>;
@@ -34,5 +31,4 @@ export default function PublicRoutes({ children , paths }) {
 
 PublicRoutes.propTypes = {
   children: PropTypes.node.isRequired,
-  paths: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

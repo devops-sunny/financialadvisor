@@ -6,15 +6,21 @@ import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
 import { Alert, IconButton, InputAdornment, Link, Stack } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 // auth
 // components
 import FormProvider, { RHFTextField } from '../../components/hook-form';
 import Iconify from '../../components/iconify';
 
+import { loginAction } from '../../redux/Auth/actions';
+
 
 export default function AuthLoginForm() {
 
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
@@ -22,8 +28,8 @@ export default function AuthLoginForm() {
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
+    email: 'joh22n@example.com',
+    password: 'newPassword123',
   };
 
   const methods = useForm({
@@ -41,6 +47,7 @@ export default function AuthLoginForm() {
   const onSubmit = async (data) => {
     try {
       console.log(data)
+      dispatch(loginAction(data, navigate));
     } catch (error) {
       console.error(error);
 

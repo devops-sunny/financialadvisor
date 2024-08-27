@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
+import { Box, Divider, MenuItem, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-import { Box, Divider, Typography, Stack, MenuItem } from '@mui/material';
 // routes
-import { PATH_AUTH } from '../../../routes/paths';
 // auth
 import { useAuthContext } from '../../../auth/useAuthContext';
 // components
-import { CustomAvatar } from '../../../components/custom-avatar';
-import { useSnackbar } from '../../../components/snackbar';
-import MenuPopover from '../../../components/menu-popover';
 import { IconButtonAnimate } from '../../../components/animate';
+import { CustomAvatar } from '../../../components/custom-avatar';
+import MenuPopover from '../../../components/menu-popover';
+import { useSnackbar } from '../../../components/snackbar';
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +34,7 @@ const OPTIONS = [
 export default function AccountPopover() {
   const navigate = useNavigate();
 
-  const { user, logout } = useAuthContext();
+  const { user } = useAuthContext();
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -51,9 +50,9 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      logout();
-      navigate(PATH_AUTH.login, { replace: true });
-      handleClosePopover();
+      localStorage.clear();
+      navigate("/");
+      window.location.reload();
     } catch (error) {
       console.error(error);
       enqueueSnackbar('Unable to logout!', { variant: 'error' });

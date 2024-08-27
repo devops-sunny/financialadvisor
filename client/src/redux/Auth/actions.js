@@ -1,38 +1,29 @@
-import { LoginIn, RegisterIn } from "src/services/AuthServices";
+import { LoginIn, RegisterIn } from "../../services/AuthServices";
 import { AuthDetails } from "./AuthProfile";
 
-export const loginAction = (data ,navigate) => {
-    return function (dispatch) {
-        LoginIn(data)
-          .then((res) => {
-
-            localStorage.setItem("Token",res?.token)
-            localStorage.setItem("role",res?.role)
-            
-            if (res?.role === "Admin") {
-              navigate("/Admin")
-            }
-            if (res?.role === "FinancialAdviser") {
-              navigate("/FinancialAdviser")
-            }
-           dispatch(AuthDetails(res));
-          })
-          .catch((error) => {
-            console.log("error", error);
-          });
-      };
+export const loginAction = (data, navigate) => (dispatch) => {
+    LoginIn(data)
+      .then((res) => {
+        localStorage.setItem("Token", res?.data.token);
+        localStorage.setItem("role", res?.data?.user?.role);
+        if (res?.data?.user?.role === "Admin") {
+          navigate("/dashboard");
+        } else if (res?.data?.user?.role === "FinancialAdviser") {
+          navigate("/FinancialAdviserDashboard");
+        }
+        dispatch(AuthDetails(res));
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
 };
 
-export const registerAction = (data) => {
-    return function (dispatch) {
-        RegisterIn(data)
-          .then((res) => {
-            console.log(res)
-          })
-          .catch((error) => {
-            console.log("error", error);
-          });
-      };
+export const registerAction = (data) => (dispatch) => {
+    RegisterIn(data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
 };
-
-  
