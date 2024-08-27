@@ -1,25 +1,27 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch as useAppDispatch, useSelector as useAppSelector } from 'react-redux';
-import { persistStore, persistReducer } from 'redux-persist';
-import rootReducer, { rootPersistConfig } from './rootReducer';
+import {
+  applyMiddleware,
+  compose,
+  legacy_createStore as createStore,
+} from "redux";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { thunk } from "redux-thunk";
+import rootReducer from "./rootReducer";
 
+const middleware = [thunk];
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["Auth"],
+};
 
-const store = configureStore({
-  reducer: persistReducer(rootPersistConfig, rootReducer),
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-      immutableCheck: false,
-    }),
-});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const persistor = persistStore(store);
+export const store = createStore(
+  persistedReducer,
+  composeEnhancer(applyMiddleware(...middleware))
+);
 
-const { dispatch } = store;
-
-const useSelector = useAppSelector;
-
-const useDispatch = () => useAppDispatch();
-
-export { store, persistor, dispatch, useSelector, useDispatch };
+export const persistor = persistStore(store);

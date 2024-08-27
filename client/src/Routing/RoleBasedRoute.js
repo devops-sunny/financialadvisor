@@ -1,13 +1,10 @@
 import PropTypes from "prop-types";
-import { Container, Alert, AlertTitle } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { logout } from "../redux/Auth/Action";
-
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 RoleBasedRoute.propTypes = {
-  accessibleRoles: PropTypes.array, // Example ['admin', 'leader']
+  accessibleRoles: PropTypes.array, 
   children: PropTypes.node,
 };
 
@@ -16,33 +13,21 @@ const useCurrentRole = () => {
   return role;
 };
 
-export default function RoleBasedRoute({ accessibleRoles, children }) {
+export default function RoleBasedRoute({ accessibleRoles, children , paths }) {
   const currentRole = useCurrentRole();
   const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.Auth.isAuthenticated);
-  const token = sessionStorage.getItem("token");
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    return !isAuthenticated && navigate("/");
-  }, [isAuthenticated]);
-  
-  useEffect(() => {
-    if (token === null) {
-      dispatch(logout());
-      return <Navigate to={"/"} />;
-    }
-  });
+  useEffect(()=>{
+   if(currentRole === ""){
+    navigate("/")
+   }else{
+    navigate(paths)
+   }
+  },[children, currentRole, navigate, paths])
+
 
   if (!accessibleRoles.includes(currentRole)) {
-    return (
-      <Container>
-        <Alert severity="error">
-          <AlertTitle>Permission Denied</AlertTitle>
-          You do not have permission to access this page
-        </Alert>
-      </Container>
-    );
+    return <p>You do not have permission to access this page</p>;
   }
 
   return <>{children}</>;

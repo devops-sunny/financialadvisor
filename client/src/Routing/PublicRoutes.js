@@ -1,7 +1,5 @@
-import React from "react";
 import { useSelector } from "react-redux";
-
-import { Navigate, Outlet } from "react-router-dom";
+import {Navigate } from "react-router-dom";
 
 const useAuth = () => {
   const token = useSelector((state) => state.Auth.token);
@@ -12,26 +10,19 @@ const useAuth = () => {
   }
 };
 
-const PublicRoutes = (props) => {
+export default function PublicRoutes({ children , paths }) {
   const auth = useAuth();
   const role = useSelector((state) => state.Auth.role);
 
   if (auth) {
     if (role === "Admin") {
-      return <Navigate to="/doctor" />;
+      return <Navigate to="/Admin" />;
     }
-    if (role === "Doctor") {
-      return <Navigate to="/patient" />;
-    }
-    if (role === "Pharmacy") {
-      return <Navigate to="/search-prescription" />;
-    }
-    if (role === "Manager") {
-      return <Navigate to="/patient" />;
+    if (role === "FinancialAdviser") {
+      return <Navigate to="/FinancialAdviser" />;
     }
   } else {
-    return <Outlet />;
+    return <>{children}</>;
   }
 };
 
-export default PublicRoutes;
