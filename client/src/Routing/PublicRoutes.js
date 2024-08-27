@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-use-before-define
+
+import PropTypes from 'prop-types';
 import { useSelector } from "react-redux";
 import {Navigate } from "react-router-dom";
 
@@ -5,9 +8,10 @@ const useAuth = () => {
   const token = useSelector((state) => state.Auth.token);
   if (token) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
+
 };
 
 export default function PublicRoutes({ children , paths }) {
@@ -26,3 +30,9 @@ export default function PublicRoutes({ children , paths }) {
   }
 };
 
+
+
+PublicRoutes.propTypes = {
+  children: PropTypes.node.isRequired,
+  paths: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

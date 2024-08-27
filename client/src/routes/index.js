@@ -17,7 +17,7 @@ import {
   PageTwo,
   RegisterPage,
 } from "./elements";
-import PublicRoutes from "src/Routing/PublicRoutes";
+import PublicRoutes from "../Routing/PublicRoutes";
 
 export default function Router() {
   return useRoutes([
