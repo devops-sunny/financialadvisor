@@ -32,7 +32,7 @@ export default function RoleBasedRoute({ hasContent = true, roles, children }) {
   const auth = useAuth();
 
 
-  if (auth) {
+  if (!auth) {
     return <LoadingScreen />;
   }
 
