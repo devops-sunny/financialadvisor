@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-// form
 import { useFormContext, Controller } from 'react-hook-form';
-// @mui
 import {
   Box,
   Chip,
@@ -15,7 +13,7 @@ import {
   FormHelperText,
 } from '@mui/material';
 
-// ----------------------------------------------------------------------
+
 
 RHFSelect.propTypes = {
   name: PropTypes.string,
@@ -23,9 +21,10 @@ RHFSelect.propTypes = {
   children: PropTypes.node,
   helperText: PropTypes.node,
   maxHeight: PropTypes.number,
+  options:PropTypes.array,
 };
 
-export function RHFSelect({ name, native, children, helperText, maxHeight = 220, ...other }) {
+export function RHFSelect({ name, native, children,options, helperText, maxHeight = 220, ...other }) {
   const { control } = useFormContext();
 
   return (
@@ -61,7 +60,20 @@ export function RHFSelect({ name, native, children, helperText, maxHeight = 220,
           helperText={error ? error?.message : helperText}
           {...other}
         >
-          {children}
+           {options?.length === 0 ? (
+                <MenuItem sx={{ color: "gray" }}>No Options</MenuItem>
+              ) : (
+                options?.map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    value={item.id}
+                    sx={{ textTransform: "capitalize" }}
+                  >
+                    {item.title}
+                  </MenuItem>
+                ))
+              )}
+
         </TextField>
       )}
     />

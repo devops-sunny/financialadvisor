@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Box, Card, CardHeader, Container, Stack } from '@mui/material';
 import { useSettingsContext } from '../components/settings';
-import DataGridBasic from "../sections/mui/data-grid/DataGridBasic";
+import Category from '../sections/ProductCategory/Category';
 
 export default function PageSix() {
   const { themeStretch } = useSettingsContext();
@@ -17,7 +17,7 @@ export default function PageSix() {
           <Card>
             <CardHeader title="Custom" sx={{ mb: 2 }} />
             <Box sx={{ height: 390 }}>
-              <DataGridBasic data={[]} />
+              <Category />
             </Box>
           </Card>
         </Stack>

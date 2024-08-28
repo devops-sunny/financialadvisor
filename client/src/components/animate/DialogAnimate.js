@@ -1,11 +1,6 @@
+import { AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { m, AnimatePresence } from 'framer-motion';
-// @mui
-import { Dialog, Box, Paper } from '@mui/material';
-//
-import { varFade } from './variants';
-
-// ----------------------------------------------------------------------
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 
 DialogAnimate.propTypes = {
   sx: PropTypes.object,
@@ -13,45 +8,43 @@ DialogAnimate.propTypes = {
   onClose: PropTypes.func,
   children: PropTypes.node,
   variants: PropTypes.object,
+  title: PropTypes.string,
 };
 
-export default function DialogAnimate({ open , variants, onClose, children, sx, ...other }) {
+export default function DialogAnimate({ open =true ,title, variants, onClose, children, sx, ...other }) {
   return (
     <AnimatePresence>
       {open && (
-        <Dialog
-          fullWidth
-          maxWidth="xs"
-          open={open}
-          onClose={onClose}
-          PaperComponent={(props) => (
-            <Box
-              component={m.div}
-              {...(variants ||
-                varFade({
-                  distance: 120,
-                  durationIn: 0.32,
-                  durationOut: 0.24,
-                  easeIn: 'easeInOut',
-                }).inUp)}
-              sx={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Box onClick={onClose} sx={{ width: '100%', height: '100%', position: 'fixed' }} />
-              <Paper sx={sx} {...props}>
-                {props.children}
-              </Paper>
-            </Box>
-          )}
-          {...other}
-        >
-          {children}
-        </Dialog>
+         <Dialog
+         open
+         fullWidth
+         maxWidth="md"
+       >
+         <div className="modal-header">
+           {title && (
+             <DialogTitle>
+               {title}
+               {onClose ? (
+                 <IconButton
+                   aria-label="close"
+                   onClick={onClose}
+                   sx={{
+                     position: "absolute",
+                     right: 8,
+                     top: 8,
+                   }}
+                 >
+                   X
+                  </IconButton>
+               ) : null}
+             </DialogTitle>
+           )}
+         </div>
+         <DialogContent className="add-doctor-form-details" sx={sx}>
+           {children}
+         </DialogContent>
+       </Dialog>
+
       )}
     </AnimatePresence>
   );
