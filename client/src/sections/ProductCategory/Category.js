@@ -54,13 +54,13 @@ const Category = () => {
   };
 
   const CategoryColumn = [
-    { field: 'name', headerName: 'Name', width: 250 },
-    { field: 'description', headerName: 'Description', width: 400 },
-    { field: 'status', headerName: 'Status', width: 250 },
+    { field: 'name', headerName: 'Name', width: 450 },
+    { field: 'description', headerName: 'Description', width: 450 },
+    { field: 'status', headerName: 'Status', width: 100 },
     {
       field: 'action',
       headerName: 'Action',
-      width: 250,
+      width: 100,
       renderCell: ({ row }) => (
         <strong>
           <Iconify icon="akar-icons:edit" onClick={handleEditClick(row)} />
@@ -73,6 +73,7 @@ const Category = () => {
   const onDelete = (row) => {
     setConfirmDialog({ ...confirmDialog, isOpen: false });
     dispatch(deleteCategory(row._id));
+    setIsModelOpen(false);
   };
 
   const handleDeleteClick = (row) => (event) => {
