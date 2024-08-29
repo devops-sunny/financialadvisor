@@ -36,6 +36,7 @@ export function RHFSelect({ name, native, children,options, helperText, maxHeigh
           {...field}
           select
           fullWidth
+          size="small"
           SelectProps={{
             native,
             MenuProps: {

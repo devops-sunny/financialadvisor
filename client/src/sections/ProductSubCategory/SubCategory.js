@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button } from '@mui/material';
-import CategoryForm from './CategoryForm';
+import CategorySubForm from './SubCategoryForm';
 import DataGridBasic from '../mui/data-grid/DataGridBasic';
 import Iconify from '../../components/iconify';
-import { fetchCategories, deleteCategory } from '../../redux/Category/actions';
+import { fetchSubCategories, deleteSubCategory } from '../../redux/SubCategory/actions';
 import ConfirmDialog from '../../components/animate/ConFirmDialog';
+import { fetchCategories } from '../../redux/Category/actions';
 
 const initialValues = {
   _id: '',
   name: '',
   description: '',
   status: '',
+  categories_id: "",
+  categories_title: "",
+
 };
 
-const Category = () => {
+const SubCategory = () => {
   const [currentRow, setCurrentRow] = useState(initialValues);
   const [categoryData, setCategoryData] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -25,9 +29,10 @@ const Category = () => {
     subTitle: '',
   });
 
-  const categories = useSelector((state) => state.Category.categories);
+  const categories = useSelector((state) => state.SubCategory.categories);
 
   useEffect(() => {
+    dispatch(fetchSubCategories());
     dispatch(fetchCategories());
   }, [dispatch]);
 
@@ -39,6 +44,8 @@ const Category = () => {
         name: item.name,
         description: item.description,
         status: item.status,
+        categories_id:item?.parentCategory?._id,
+        categories_title:item?.parentCategory?.name
       }));
       setCategoryData(formattedData);
     }
@@ -72,7 +79,7 @@ const Category = () => {
 
   const onDelete = (row) => {
     setConfirmDialog({ ...confirmDialog, isOpen: false });
-    dispatch(deleteCategory(row._id));
+    dispatch(deleteSubCategory(row._id));
     setIsModelOpen(false);
   };
 
@@ -88,6 +95,7 @@ const Category = () => {
 
   const handleEditClick = (row) => (event) => {
     event.stopPropagation();
+    console.log(row)
     setCurrentRow(row);
     setIsModelOpen(true);
   };
@@ -96,7 +104,7 @@ const Category = () => {
     <>
       <Box display="flex" justifyContent="flex-end"  p={1}>
         <Button type="button" onClick={handleClickOpen} className="add-btn">
-          Add subCategory
+          Add Category
         </Button>
       </Box>
       <div className="main-table">
@@ -104,7 +112,7 @@ const Category = () => {
           <DataGridBasic data={categoryData} columns={CategoryColumn} getRowId={(row) => row.id} />
         )}
       </div>
-      {isModelOpen && <CategoryForm handleClose={handleClose} currentRow={currentRow} />}
+      {isModelOpen && <CategorySubForm handleClose={handleClose} currentRow={currentRow} />}
       {confirmDialog && (
         <ConfirmDialog confirmDialog={confirmDialog} setConfirmDialog={setConfirmDialog} />
       )}
@@ -112,4 +120,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default SubCategory;

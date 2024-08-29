@@ -52,7 +52,7 @@ export default function Router() {
         </RoleBasedRoute>
       ),
       children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
+       
         { path: 'one', element: <PageOne />},
         { path: 'two', element: <PageTwo /> },
         { path: 'three', element: <PageThree /> },
