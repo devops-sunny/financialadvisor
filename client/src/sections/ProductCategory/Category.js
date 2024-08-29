@@ -12,6 +12,8 @@ const initialValues = {
   name: '',
   description: '',
   status: '',
+  createdAt:"",
+  updatedAt:""
 };
 
 const Category = () => {
@@ -39,6 +41,8 @@ const Category = () => {
         name: item.name,
         description: item.description,
         status: item.status,
+        createdAt:item.createdAt,
+        updatedAt:item.updatedAt,
       }));
       setCategoryData(formattedData);
     }
@@ -54,9 +58,11 @@ const Category = () => {
   };
 
   const CategoryColumn = [
-    { field: 'name', headerName: 'Name', width: 450 },
-    { field: 'description', headerName: 'Description', width: 450 },
+    { field: 'name', headerName: 'Name', width: 350 },
+    { field: 'description', headerName: 'Description', width: 350 },
     { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'createdAt', headerName: 'createdAt', width: 200 },
+    { field: 'updatedAt', headerName: 'updatedAt', width: 200 },
     {
       field: 'action',
       headerName: 'Action',

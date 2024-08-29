@@ -18,10 +18,10 @@ export const loginAction = (data, navigate) => (dispatch) => {
       });
 };
 
-export const registerAction = (data) => (dispatch) => {
+export const registerAction = (data ,navigate) => (dispatch) => {
     RegisterIn(data)
       .then((res) => {
-        console.log(res);
+        navigate("/login");
       })
       .catch((error) => {
         console.log("error", error);

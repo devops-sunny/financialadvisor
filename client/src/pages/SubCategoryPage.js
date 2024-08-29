@@ -1,16 +1,17 @@
-import { Helmet } from 'react-helmet-async';
 import { Box, Card, CardHeader, Container, Stack } from '@mui/material';
+import { Helmet } from 'react-helmet-async';
 import { useSettingsContext } from '../components/settings';
-import Category from '../sections/ProductCategory/Category';
 import SubCategory from '../sections/ProductSubCategory/SubCategory';
 
-export default function PageSix() {
+// ----------------------------------------------------------------------
+
+export default function SubCategoryPage() {
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title> Page Six </title>
+        <title> Page Four | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -18,22 +19,10 @@ export default function PageSix() {
           <Card>
             <CardHeader title="Custom" sx={{ mb: 2 }} />
             <Box sx={{ height: 390 }}>
-              <Category />
+              <SubCategory />
             </Box>
           </Card>
         </Stack>
-
-
-        <Stack spacing={5}>
-          <Card>
-            <CardHeader title="Custom" sx={{ mb: 2 }} />
-            <Box sx={{ height: 390 }}>
-            <SubCategory />
-            </Box>
-          </Card>
-        </Stack>
-
-       
       </Container>
     </>
   );

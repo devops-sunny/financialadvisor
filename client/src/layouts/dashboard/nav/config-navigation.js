@@ -22,25 +22,22 @@ const navConfig = [
   {
     subheader: 'general v4.1.0',
     items: [
-      { title: 'One', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
-      { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
-      { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
+      { title: 'dashboard', path: "", icon: ICONS.dashboard },
     ],
   },
 
-  // MANAGEMENT
-  // ----------------------------------------------------------------------
+  
   {
     subheader: 'management',
     items: [
       {
-        title: 'user',
+        title: 'management',
         path: PATH_DASHBOARD.user.root,
         icon: ICONS.user,
         children: [
-          { title: 'Four', path: PATH_DASHBOARD.user.four },
-          { title: 'Five', path: PATH_DASHBOARD.user.five },
-          { title: 'Six', path: PATH_DASHBOARD.user.six },
+          { title: 'Category', path: PATH_DASHBOARD.user.Category },
+          { title: 'SubCategory', path: PATH_DASHBOARD.user.SubCategory },
+          
         ],
       },
     ],

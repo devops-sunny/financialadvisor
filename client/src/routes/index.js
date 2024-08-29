@@ -9,12 +9,8 @@ import { PATH_AFTER_LOGIN } from '../config-global';
 import {
   LoginPage,
   Page404,
-  PageFive,
-  PageFour,
-  PageOne,
-  PageSix,
-  PageThree,
-  PageTwo,
+  SubCategoryPage,
+  CategoryPage,
   RegisterPage,
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
@@ -25,7 +21,6 @@ export default function Router() {
     {
       path: '/',
       children: [
-        { element: <Navigate to={PATH_AFTER_LOGIN} replace />, index: true },
         {
           path: 'login',
           element: (
@@ -53,19 +48,15 @@ export default function Router() {
       ),
       children: [
        
-        { path: 'one', element: <PageOne />},
-        { path: 'two', element: <PageTwo /> },
-        { path: 'three', element: <PageThree /> },
         {
           path: 'user',
           children: [
             {
-              element: <Navigate to="/dashboard/user/four" replace />,
+              element: <Navigate to="/dashboard/user/SubCategory" replace />,
               index: true,
             },
-            { path: 'four', element: <PageFour /> },
-            { path: 'five', element: <PageFive /> },
-            { path: 'six', element: <PageSix /> },
+            { path: 'SubCategory', element: <SubCategoryPage /> },
+            { path: 'Category', element: <CategoryPage /> },
           ],
         },
       ],

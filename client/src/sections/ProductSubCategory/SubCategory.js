@@ -15,7 +15,8 @@ const initialValues = {
   status: '',
   categories_id: "",
   categories_title: "",
-
+  createdAt:"",
+  updatedAt:""
 };
 
 const SubCategory = () => {
@@ -45,7 +46,9 @@ const SubCategory = () => {
         description: item.description,
         status: item.status,
         categories_id:item?.parentCategory?._id,
-        categories_title:item?.parentCategory?.name
+        categories_title:item?.parentCategory?.name,
+        createdAt:item.createdAt,
+        updatedAt:item.updatedAt,
       }));
       setCategoryData(formattedData);
     }
@@ -61,9 +64,12 @@ const SubCategory = () => {
   };
 
   const CategoryColumn = [
-    { field: 'name', headerName: 'Name', width: 450 },
-    { field: 'description', headerName: 'Description', width: 450 },
+    { field: 'name', headerName: 'Name', width: 250 },
+    { field: 'description', headerName: 'Description', width: 250 },
     { field: 'status', headerName: 'Status', width: 100 },
+    { field: 'categories_title', headerName: 'categories name', width: 200 },
+    { field: 'createdAt', headerName: 'createdAt', width: 200 },
+    { field: 'updatedAt', headerName: 'updatedAt', width: 200 },
     {
       field: 'action',
       headerName: 'Action',

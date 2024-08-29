@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import * as Yup from 'yup';
 // form
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
@@ -11,12 +14,14 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
+import { registerAction } from '../../redux/Auth/actions';
 
 // ----------------------------------------------------------------------
 
 export default function AuthRegisterForm() {
   const { register } = useAuthContext();
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
@@ -49,6 +54,14 @@ export default function AuthRegisterForm() {
     try {
       if (register) {
         console.log(data)
+
+        const payload = {
+          name: `${data.firstName}${data.lastName}`,
+          email: data.email,
+          password: data.password
+        }
+        
+        dispatch(registerAction(payload, navigate));
       }
     } catch (error) {
       console.error(error);
