@@ -4,7 +4,8 @@ const Category = require('../models/categoryModel');
 
 exports.getAllCategories = async (req, res) => {
   try {
-    const categories = await Category.find().populate("ParentCategory");
+    const categories = await Category.find().populate('parentCategory');
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.LIST,
