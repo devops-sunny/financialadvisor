@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs'); 
 const User = require("../models/userModel");
 
 exports.getAllUsers = async (req, res) => {
@@ -29,9 +30,18 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+
+    const updates = { ...req.body };
+
+    if (updates.password) {
+      updates.password = await bcrypt.hash(updates.password, 12);
+    }
+
+    
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, updates, {
       new: true,
     });
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.UPDATED,
