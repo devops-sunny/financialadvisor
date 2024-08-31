@@ -81,7 +81,7 @@ const AppointmentForm = ({ handleClose, currentRow }) => {
     const appointmentData = {
       userId: data.user_id,
       productId: data.product_id,
-      financialAdvisorId: data.financialAdvisor_id,
+      financialAdvisorId: data.financialAdvisor_id !== "" ? data.financialAdvisor_id :null,
       date: data.date,
       startTime: data.startTime,
       endTime: data.endTime,

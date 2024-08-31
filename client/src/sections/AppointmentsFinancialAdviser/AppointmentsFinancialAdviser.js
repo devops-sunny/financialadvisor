@@ -5,6 +5,7 @@ import Iconify from '../../components/iconify';
 import { fetchAppointments } from '../../redux/Appointments/actions';
 import DataGridBasic from '../mui/data-grid/DataGridBasic';
 import AppointmentForm from './AppointmentForm';
+import Calendar from '../Fullcalendar/Calendar';
 
 const initialValues = {
   _id: '',
@@ -26,6 +27,8 @@ const AppointmentsFinancialAdviser = () => {
   const [currentRow, setCurrentRow] = useState(initialValues);
   const [appointmentData, setAppointmentData] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [eventsData, setEventsData] = useState([]);
+
   const dispatch = useDispatch();
 
   const appointments = useSelector((state) => state.Appointments.appointments);
@@ -62,6 +65,17 @@ const AppointmentsFinancialAdviser = () => {
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       }));
+
+      const events = filteredAppointments?.map((item) => ({
+        id: item.id,
+        title: `${item?.financialAdvisorId?.firstName} ${item?.productId?.name}`,
+        start: `${item.date}T${item.startTime}:00`,
+        end: `${item.date}T${item.endTime}:00`,
+        color: "#1452",  
+        textColor: 'white'        
+  }));
+    
+    setEventsData(events)
 
       setAppointmentData(formattedData);
     }
@@ -110,6 +124,7 @@ const AppointmentsFinancialAdviser = () => {
             />
         </div>
         {isModelOpen && <AppointmentForm handleClose={handleClose} currentRow={currentRow} />}
+        <Calendar events={eventsData}/>
       </div>
    );
 };

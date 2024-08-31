@@ -9,4 +9,4 @@ export const addAppointmentData = (data, options = null) => ApiService.post(appo
 
 export const updateAppointmentData = (id, data, options = null) => ApiService.put(`${appointmentURL}${id}`, data, options);
 
-export const deleteAppointmentData = (id, options = null) => ApiService.delete(`${appointmentURL}${id}`, options);
+export const deleteAppointmentData = (id, options = null) => ApiService.Delete(`${appointmentURL}${id}`, options);

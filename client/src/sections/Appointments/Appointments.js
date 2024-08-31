@@ -6,6 +6,9 @@ import DataGridBasic from '../mui/data-grid/DataGridBasic';
 import Iconify from '../../components/iconify';
 import { fetchAppointments, deleteAppointment } from '../../redux/Appointments/actions';
 import ConfirmDialog from '../../components/animate/ConFirmDialog';
+import Calendar from '../Fullcalendar/Calendar';
+
+
 
 const initialValues = {
   _id: '',
@@ -27,6 +30,8 @@ const Appointments = () => {
   const [currentRow, setCurrentRow] = useState(initialValues);
   const [appointmentData, setAppointmentData] = useState([]);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [eventsData, setEventsData] = useState([]);
+
   const dispatch = useDispatch();
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
@@ -61,6 +66,20 @@ const Appointments = () => {
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       }));
+
+      
+    const events = appointments?.map((item) => ({
+          id: item.id,
+          title: `${item?.financialAdvisorId?.firstName} ${item?.productId?.name}`,
+          start: `${item.date}T${item.startTime}:00`,
+          end: `${item.date}T${item.endTime}:00`,
+          color: "#1452",  
+          textColor: 'white'        
+    }));
+      
+      setEventsData(events)
+
+    console.log(formattedData)
       setAppointmentData(formattedData);
     }
   }, [appointments]);
@@ -135,6 +154,7 @@ const Appointments = () => {
       {confirmDialog && (
         <ConfirmDialog confirmDialog={confirmDialog} setConfirmDialog={setConfirmDialog} />
       )}
+     <Calendar events={eventsData}/>
     </>
   );
 };

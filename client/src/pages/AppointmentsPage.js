@@ -15,7 +15,7 @@ export default function AppointmentsPage() {
         <Stack spacing={5}>
           <Card>
             <CardHeader title="Custom" sx={{ mb: 2 }} />
-            <Box sx={{ height: 800 }}>
+            <Box sx={{ height: "100%" }}>
               <Appointments />
             </Box>
           </Card>
