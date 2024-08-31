@@ -20,7 +20,7 @@ export default function PublicRoutes({ children  }) {
       return <Navigate to="/dashboard" />;
     }
     if (role === "FinancialAdviser") {
-      return <Navigate to="/FinancialAdviserDashboard" />;
+      return <Navigate to="/FinancialAdviserDashboard/users/Appointments" />;
     }
   } else {
     return <>{children}</>;

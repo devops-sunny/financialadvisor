@@ -1,3 +1,4 @@
+const mongoose = require('mongoose'); 
 const Appointment = require("../models/appointmentModel");
 const Meeting = require("../models/meetingModel");
 
@@ -66,7 +67,7 @@ exports.createAppointment = async (req, res) => {
 
 exports.updateAppointment = async (req, res) => {
   try {
-    const { financialAdvisorId, date, startTime, endTime } = req.body;
+    const { financialAdvisorId, status , date, startTime, endTime } = req.body;
 
     // Ensure startTime is before endTime
     if (startTime >= endTime) {
@@ -110,6 +111,7 @@ exports.updateAppointment = async (req, res) => {
         date: date || existingAppointment.date,
         startTime: startTime || existingAppointment.startTime,
         endTime: endTime || existingAppointment.endTime,
+        status: status ||  existingAppointment.status
       },
       { new: true }
     );
@@ -148,3 +150,4 @@ exports.deleteAppointment = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+

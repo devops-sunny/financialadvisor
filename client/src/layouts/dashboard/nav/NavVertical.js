@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // @mui
 import { Box, Stack, Drawer } from '@mui/material';
 // hooks
@@ -13,6 +14,7 @@ import Scrollbar from '../../../components/scrollbar';
 import { NavSectionVertical } from '../../../components/nav-section';
 //
 import navConfig from './config-navigation';
+import FinancialAdvisors from './config-navigationFinancialAdvisors';
 import NavDocs from './NavDocs';
 import NavAccount from './NavAccount';
 import NavToggleButton from './NavToggleButton';
@@ -26,6 +28,7 @@ NavVertical.propTypes = {
 
 export default function NavVertical({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
+  const FinancialAdviserid = useSelector((state) => state.Auth.role);  // 'FinancialAdviser',
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -61,7 +64,9 @@ export default function NavVertical({ openNav, onCloseNav }) {
         <NavAccount />
       </Stack>
 
-      <NavSectionVertical data={navConfig} />
+
+  
+      <NavSectionVertical data={ FinancialAdviserid !== 'FinancialAdviser'  ?  navConfig : FinancialAdvisors } />
 
       <Box sx={{ flexGrow: 1 }} />
 

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 // @mui
+import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
 import { AppBar, Box, Toolbar } from '@mui/material';
 // config
@@ -11,11 +12,13 @@ import { bgBlur } from '../../../utils/cssStyles';
 import { NavSectionHorizontal } from '../../../components/nav-section';
 //
 import navConfig from './config-navigation';
+import FinancialAdvisors from './config-navigationFinancialAdvisors';
 
 // ----------------------------------------------------------------------
 
 function NavHorizontal() {
   const theme = useTheme();
+  const FinancialAdviserid = useSelector((state) => state.Auth.role);  // 'FinancialAdviser',
 
   return (
     <AppBar
@@ -33,7 +36,8 @@ function NavHorizontal() {
           }),
         }}
       >
-        <NavSectionHorizontal data={navConfig} />
+              <NavSectionHorizontal data={ FinancialAdviserid !== 'FinancialAdviser'  ?  navConfig : FinancialAdvisors } />
+
       </Toolbar>
 
       <Shadow />

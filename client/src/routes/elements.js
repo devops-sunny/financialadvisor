@@ -27,3 +27,8 @@ export const ProductsPage = Loadable(lazy(() => import('../pages/ProductsPage'))
 export const AppointmentsPage = Loadable(lazy(() => import('../pages/AppointmentsPage')));
 
 
+// ----------------------------------------------------------------------
+
+export const AppointmentsFinancialAdviserPage = Loadable(lazy(() => import('../pages/AppointmentsFinancialAdviserPage')));
+
+

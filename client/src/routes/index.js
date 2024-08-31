@@ -16,7 +16,8 @@ import {
   UserPage,
   FinancialAdvisorsPage,
   ProductsPage,
-  AppointmentsPage
+  AppointmentsPage,
+  AppointmentsFinancialAdviserPage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -69,6 +70,27 @@ export default function Router() {
             { path: 'FinancialAdvisors', element: <FinancialAdvisorsPage /> },
             { path: 'Products', element: <ProductsPage /> },
             { path: 'Appointments', element: <AppointmentsPage /> }
+          ],
+        },
+      ],
+    },
+    {
+      path: '/FinancialAdviserDashboard',
+      element: (
+        <RoleBasedRoute roles={["FinancialAdviser"]} >
+          <DashboardLayout />
+        </RoleBasedRoute>
+      ),
+      children: [
+       
+        {
+          path: 'FinancialAdviser',
+          children: [
+            {
+              element: <Navigate to="/FinancialAdviserDashboard/FinancialAdviser/Appointments" replace />,
+              index: true,
+            },
+            { path: 'Appointments', element: <AppointmentsFinancialAdviserPage /> }
           ],
         },
       ],

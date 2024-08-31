@@ -1,4 +1,5 @@
 // @mui
+import { useSelector } from 'react-redux';
 import { Stack, Box } from '@mui/material';
 // config
 import { NAV } from '../../../config-global';
@@ -9,11 +10,15 @@ import Logo from '../../../components/logo';
 import { NavSectionMini } from '../../../components/nav-section';
 //
 import navConfig from './config-navigation';
+
 import NavToggleButton from './NavToggleButton';
+import FinancialAdvisors from './config-navigationFinancialAdvisors';
 
 // ----------------------------------------------------------------------
 
 export default function NavMini() {
+  const FinancialAdviserid = useSelector((state) => state.Auth.role);  // 'FinancialAdviser',
+
   return (
     <Box
       component="nav"
@@ -41,7 +46,8 @@ export default function NavMini() {
       >
         <Logo sx={{ mx: 'auto', my: 2 }} />
 
-        <NavSectionMini data={navConfig} />
+              <NavSectionMini data={ FinancialAdviserid !== 'FinancialAdviser'  ?  navConfig : FinancialAdvisors } />
+
       </Stack>
     </Box>
   );

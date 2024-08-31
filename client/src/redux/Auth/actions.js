@@ -9,7 +9,7 @@ export const loginAction = (data, navigate) => (dispatch) => {
         if (res?.data?.user?.role === "Admin") {
           navigate("/dashboard");
         } else if (res?.data?.user?.role === "FinancialAdviser") {
-          navigate("/FinancialAdviserDashboard");
+          navigate("/FinancialAdviserDashboard/users/Appointments");
         }
         dispatch(AuthDetails(res));
       })
