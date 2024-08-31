@@ -36,8 +36,13 @@ const navConfig = [
         icon: ICONS.user,
         children: [
           { title: 'Category', path: PATH_DASHBOARD.user.Category },
-          { title: 'SubCategory', path: PATH_DASHBOARD.user.SubCategory },
-          
+          { title: 'SubCategory', path: PATH_DASHBOARD.user.SubCategory },       
+          { title: 'Faq', path: PATH_DASHBOARD.user.Faq },
+          { title: 'Privacy', path: PATH_DASHBOARD.user.Privacy },
+          { title: 'Terms', path: PATH_DASHBOARD.user.Terms },
+          { title: 'User', path: PATH_DASHBOARD.user.User },
+          { title: 'FinancialAdvisors', path: PATH_DASHBOARD.user.FinancialAdvisors },
+          { title: 'Products', path: PATH_DASHBOARD.user.Products }
         ],
       },
     ],

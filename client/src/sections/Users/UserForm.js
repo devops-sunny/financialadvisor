@@ -1,28 +1,27 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { DialogAnimate } from '../../components/animate';
-import { RHFSelect, RHFTextField } from '../../components/hook-form';
+import { RHFTextField ,RHFSelect} from '../../components/hook-form';
 import FormProvider from '../../components/hook-form/FormProvider';
-import { updateCategory, addCategory  } from '../../redux/Category/actions';
+import { updateUser, addUser } from '../../redux/Users/actions';
 
 const Schema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
-  description: Yup.string().required('Description is required'),
-  status: Yup.string().required('Status is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  role: Yup.string().required('Role is required'),
 });
 
 const statuses = [
-  { id: "Active", title: "Active" },
-  { id: "Draft", title: "Draft" },
-  { id: "Inactive", title: "Inactive" } 
-];
+    { id: 'Admin', title: 'Admin' },
+    { id: 'FinancialAdviser', title: 'FinancialAdviser' },
+    { id: 'User', title: 'User' },
+  ];
 
-
-const CategoryForm = ({ handleClose, currentRow }) => {
+const UserForm = ({ handleClose, currentRow }) => {
   const defaultValues = currentRow;
   const dispatch = useDispatch();
 
@@ -36,16 +35,16 @@ const CategoryForm = ({ handleClose, currentRow }) => {
   } = methods;
 
   const onSubmit = (data) => {
-    const categoryData = {
+    const userData = {
       name: data.name,
-      description: data.description,
-      status: data.status,
+      email: data.email,
+      role: data.role,
     };
     if (data._id) {
-      categoryData._id = data._id;
-      dispatch(updateCategory(data._id, categoryData));
+      userData._id = data._id;
+      dispatch(updateUser(data._id, userData));
     } else {
-      dispatch(addCategory(categoryData));
+      dispatch(addUser(userData));
     }
     handleClose();
   };
@@ -54,34 +53,35 @@ const CategoryForm = ({ handleClose, currentRow }) => {
     <>
       <DialogAnimate
         onClose={handleClose}
-        title={currentRow._id ? 'Update Product' : 'Add Product'}
+        title={currentRow._id ? 'Update User' : 'Add User'}
       >
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={4}  p={3} className="css-1lwbda4-MuiStack-root">
+          <Stack spacing={3} className="css-1lwbda4-MuiStack-root">
             <RHFTextField name="name" label="Name *" autoFocus />
-            <RHFTextField name="description" label="Description *" />
-            <RHFSelect name="status" label="Status *"  options={statuses} />
+            <RHFTextField name="email" label="Email *" />
+            <RHFSelect name="role" label="Role *" options={statuses} />
+
           </Stack>
           <Stack direction="row" spacing={1} justifyContent="flex-end" p={3}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" variant="contained">
           {currentRow._id ? 'Update' : 'Save'}
           </Button>
-        </Stack>
+          </Stack>
         </FormProvider>
       </DialogAnimate>
     </>
   );
 };
 
-CategoryForm.propTypes = {
+UserForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   currentRow: PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string,
-    description: PropTypes.string,
-    status: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
   }),
 };
 
-export default CategoryForm;
+export default UserForm;

@@ -3,7 +3,15 @@ const Product = require("../models/productModel");
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("category subCategory");
+    const products = await Product.find()
+    .populate({
+      path: 'category',
+      populate: {
+        path: 'parentCategory', 
+        select: 'name  description', 
+      },
+    });
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.LIST,

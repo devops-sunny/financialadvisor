@@ -28,11 +28,7 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    FinancialAdvisorid:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref:"FinancialAdvisor",
-      default: null
-    }
+    FinancialAdvisorid: { type: mongoose.Schema.Types.ObjectId, ref: 'FinancialAdvisor', default: null }, 
   },
   {
     timestamps: true,

@@ -3,15 +3,19 @@ import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
-// config
-import { PATH_AFTER_LOGIN } from '../config-global';
-//
+
 import {
   LoginPage,
   Page404,
   SubCategoryPage,
   CategoryPage,
   RegisterPage,
+  FaqPage ,
+  PrivacyPage,
+  TermsPage,
+  UserPage,
+  FinancialAdvisorsPage,
+  ProductsPage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -57,6 +61,12 @@ export default function Router() {
             },
             { path: 'SubCategory', element: <SubCategoryPage /> },
             { path: 'Category', element: <CategoryPage /> },
+            { path: 'Faq', element: <FaqPage /> },
+            { path: 'Privacy', element: <PrivacyPage /> },
+            { path: 'Terms', element: <TermsPage /> },
+            { path: 'User', element: <UserPage /> },
+            { path: 'FinancialAdvisors', element: <FinancialAdvisorsPage /> },
+            { path: 'Products', element: <ProductsPage /> }
           ],
         },
       ],

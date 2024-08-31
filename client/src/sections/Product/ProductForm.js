@@ -3,18 +3,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 import { DialogAnimate } from '../../components/animate';
-import { RHFSelect, RHFTextField } from '../../components/hook-form';
+import { RHFTextField, RHFSelect } from '../../components/hook-form';
 import FormProvider from '../../components/hook-form/FormProvider';
-import { updateSubCategory, addSubCategory } from '../../redux/SubCategory/actions';
+import { updateProduct, addProduct } from '../../redux/Product/actions';
+import { fetchSubCategories } from '../../redux/SubCategory/actions';
 
 const Schema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   description: Yup.string().required('Description is required'),
   status: Yup.string().required('Status is required'),
-  categories_id:Yup.string().required('Categories is required'),
+  categories_id: Yup.string().required('Category is required'),
+  details: Yup.string().required('Details are required'),
 });
 
 const statuses = [
@@ -23,45 +25,53 @@ const statuses = [
   { id: 'Inactive', title: 'Inactive' },
 ];
 
-const CategorySubForm = ({ handleClose, currentRow }) => {
-  const defaultValues = currentRow;
+const ProductForm = ({ handleClose, currentRow }) => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState([]);
-
-  const categories = useSelector((state) => state.Category.categories);
+  const [categories, setCategories] = useState([]);
+  
+  const categoryOptions = useSelector((state) => state.SubCategory.categories);
 
   useEffect(() => {
-    if (categories && categories.length > 0) {
-      const formattedData = categories.map((item, index) => ({
+    dispatch(fetchSubCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (categoryOptions && categoryOptions.length > 0) {
+      const formattedData = categoryOptions.map((item) => ({
         id: item._id,
         title: item.name,
       }));
-      setValue(formattedData);
+      setCategories(formattedData);
     }
-  }, [categories]);
+  }, [categoryOptions]);
+
+  const defaultValues = currentRow;
 
   const methods = useForm({
     resolver: yupResolver(Schema),
     defaultValues,
   });
 
-  const {
-    handleSubmit,
-  } = methods;
+  const { handleSubmit } = methods;
 
   const onSubmit = (data) => {
-    console.log("dddddd",data)
-    const categoryData = {
+    let productData = {
       name: data.name,
       description: data.description,
       status: data.status,
-      parentCategory:data?.categories_id
+      category: data.categories_id,
+      details: data.details,
+      keywords: ["key1" ,"key2"] ||data.keywords,
     };
+
+    if(data.image){
+        productData = data.image
+    }
+
     if (data._id) {
-      categoryData._id = data._id;
-      dispatch(updateSubCategory(data._id, categoryData));
+      dispatch(updateProduct(data._id, productData));
     } else {
-      dispatch(addSubCategory(categoryData));
+      dispatch(addProduct(productData));
     }
     handleClose();
   };
@@ -73,17 +83,19 @@ const CategorySubForm = ({ handleClose, currentRow }) => {
         title={currentRow._id ? 'Update Product' : 'Add Product'}
       >
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={4} p={3} className="css-1lwbda4-MuiStack-root">
+          <Stack spacing={4} p={3}>
             <RHFTextField name="name" label="Name *" autoFocus />
             <RHFTextField name="description" label="Description *" />
             <RHFSelect name="status" label="Status *" options={statuses} />
-            <RHFSelect name="categories_id" label="Categories Title *" options={value} />
+            <RHFSelect name="categories_id" label="Category *" options={categories} />
+            <RHFTextField name="details" label="Details *" />
+            <RHFTextField name="image" label="Image (Base64)" />
           </Stack>
           <Stack direction="row" spacing={1} justifyContent="flex-end" p={3}>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" variant="contained">
-          {currentRow._id ? 'Update' : 'Save'}
-          </Button>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit" variant="contained">
+              {currentRow._id ? 'Update' : 'Save'}
+            </Button>
           </Stack>
         </FormProvider>
       </DialogAnimate>
@@ -91,14 +103,18 @@ const CategorySubForm = ({ handleClose, currentRow }) => {
   );
 };
 
-CategorySubForm.propTypes = {
+ProductForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   currentRow: PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
     status: PropTypes.string,
+    category: PropTypes.string,
+    details: PropTypes.string,
+    keywords: PropTypes.array,
+    image: PropTypes.string,
   }),
 };
 
-export default CategorySubForm;
+export default ProductForm;

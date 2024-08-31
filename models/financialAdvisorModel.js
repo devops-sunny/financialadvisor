@@ -42,7 +42,7 @@ const financialAdvisorSchema = new mongoose.Schema(
     },
     timings: {
       type: [String],
-      required: true,
+      required: false,
     },
     status: {
       type: String,

@@ -18,5 +18,12 @@ export const PATH_DASHBOARD = {
     root: path(ROOTS_DASHBOARD, '/user'),
     Category: path(ROOTS_DASHBOARD, '/user/Category'),
     SubCategory: path(ROOTS_DASHBOARD, '/user/SubCategory'),
+    Faq: path(ROOTS_DASHBOARD, '/user/Faq'),
+    Privacy: path(ROOTS_DASHBOARD, '/user/Privacy'),
+    Terms: path(ROOTS_DASHBOARD, '/user/Terms'),
+    User: path(ROOTS_DASHBOARD, '/user/User'),
+    FinancialAdvisors: path(ROOTS_DASHBOARD, '/user/FinancialAdvisors'),
+    Products: path(ROOTS_DASHBOARD, '/user/Products'),
   },
 };
+

@@ -18,3 +18,11 @@ export const SubCategoryPage = Loadable(lazy(() => import('../pages/SubCategoryP
 export const CategoryPage = Loadable(lazy(() => import('../pages/CategoryPage')));
 export const RegisterPage = Loadable(lazy(() => import('../pages/RegisterPage')));
 export const Page404 = Loadable(lazy(() => import('../pages/Page404')));
+export const FaqPage = Loadable(lazy(() => import('../pages/FaqPage')));
+export const PrivacyPage = Loadable(lazy(() => import('../pages/PrivacyPage')));
+export const TermsPage = Loadable(lazy(() => import('../pages/TermsPage')));
+export const UserPage = Loadable(lazy(() => import('../pages/UserPage')));
+export const FinancialAdvisorsPage = Loadable(lazy(() => import('../pages/FinancialAdvisorsPage')));
+export const ProductsPage = Loadable(lazy(() => import('../pages/ProductsPage')));
+
+
