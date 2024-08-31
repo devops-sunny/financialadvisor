@@ -3,9 +3,21 @@ const Meeting = require("../models/meetingModel");
 
 exports.getAllAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find().populate(
-      "userId productId financialAdvisorId"
-    );
+    const appointments = await Appointment.find().populate([
+      {
+        path: 'userId',
+        select: '_id name'
+      },
+      {
+        path: 'productId',
+        select: '_id name Uniqueid'
+      },
+      {
+        path: 'financialAdvisorId',
+        select: '_id firstName'
+      }
+    ])
+    
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.LIST,

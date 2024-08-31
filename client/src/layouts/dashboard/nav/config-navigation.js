@@ -27,6 +27,7 @@ const navConfig = [
   },
 
   
+  
   {
     subheader: 'management',
     items: [
@@ -42,7 +43,9 @@ const navConfig = [
           { title: 'Terms', path: PATH_DASHBOARD.user.Terms },
           { title: 'User', path: PATH_DASHBOARD.user.User },
           { title: 'FinancialAdvisors', path: PATH_DASHBOARD.user.FinancialAdvisors },
-          { title: 'Products', path: PATH_DASHBOARD.user.Products }
+          { title: 'Products', path: PATH_DASHBOARD.user.Products },
+          { title: 'Appointmentsoduct', path: PATH_DASHBOARD.user.Appointments }
+
         ],
       },
     ],

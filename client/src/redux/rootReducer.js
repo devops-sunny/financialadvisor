@@ -8,6 +8,7 @@ import TermsReducer from "./Terms/Terms";
 import UsersReducer from "./Users/Users";
 import financialAdvisorsReducer from "./FinancialAdvisors/FinancialAdvisors";
 import ProductReducer from "./Product/Products"
+import AppointmentsReducer from "./Appointments/Appointments"
 
 const rootReducer = combineReducers({
   Auth :AuthReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   terms:TermsReducer,
   users:UsersReducer,
   financialAdvisors:financialAdvisorsReducer,
-  Product:ProductReducer
+  Product:ProductReducer,
+  Appointments:AppointmentsReducer
 });
 
 export default rootReducer;

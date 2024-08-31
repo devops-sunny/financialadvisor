@@ -15,7 +15,8 @@ import {
   TermsPage,
   UserPage,
   FinancialAdvisorsPage,
-  ProductsPage
+  ProductsPage,
+  AppointmentsPage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -66,7 +67,8 @@ export default function Router() {
             { path: 'Terms', element: <TermsPage /> },
             { path: 'User', element: <UserPage /> },
             { path: 'FinancialAdvisors', element: <FinancialAdvisorsPage /> },
-            { path: 'Products', element: <ProductsPage /> }
+            { path: 'Products', element: <ProductsPage /> },
+            { path: 'Appointments', element: <AppointmentsPage /> }
           ],
         },
       ],

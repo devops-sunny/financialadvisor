@@ -5,7 +5,7 @@ const appointmentSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: false,
+      required: true,
     },
     productId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,7 +15,7 @@ const appointmentSchema = new mongoose.Schema(
     financialAdvisorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref:"FinancialAdvisor",
-      required: false
+      default: null
     },
     date: {
       type: String,

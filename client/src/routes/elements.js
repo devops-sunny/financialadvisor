@@ -24,5 +24,6 @@ export const TermsPage = Loadable(lazy(() => import('../pages/TermsPage')));
 export const UserPage = Loadable(lazy(() => import('../pages/UserPage')));
 export const FinancialAdvisorsPage = Loadable(lazy(() => import('../pages/FinancialAdvisorsPage')));
 export const ProductsPage = Loadable(lazy(() => import('../pages/ProductsPage')));
+export const AppointmentsPage = Loadable(lazy(() => import('../pages/AppointmentsPage')));
 
 

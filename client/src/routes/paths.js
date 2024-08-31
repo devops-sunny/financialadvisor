@@ -24,6 +24,7 @@ export const PATH_DASHBOARD = {
     User: path(ROOTS_DASHBOARD, '/user/User'),
     FinancialAdvisors: path(ROOTS_DASHBOARD, '/user/FinancialAdvisors'),
     Products: path(ROOTS_DASHBOARD, '/user/Products'),
+    Appointments: path(ROOTS_DASHBOARD, '/user/Appointments'),
   },
 };
 
