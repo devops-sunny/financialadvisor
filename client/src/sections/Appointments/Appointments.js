@@ -43,7 +43,7 @@ const Appointments = () => {
   useEffect(() => {
     if (appointments && appointments.length > 0) {
       const formattedData = appointments.map((item, index) => ({
-        id: item._id,
+         id: item._id,
         _id: item._id,
 
         categories_title: item?.userId?.name,

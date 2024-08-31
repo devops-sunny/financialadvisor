@@ -104,13 +104,13 @@ const AppointmentForm = ({ handleClose, currentRow }) => {
       >
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={4} p={3}>
-            <RHFSelect name="user_id" label="User *" options={value.users || []} />
-            <RHFSelect name="product_id" label="Product *" options={value.products || []} />
+            <RHFSelect name="user_id" label="User *" options={value.users || []}  disabled ={currentRow?._id !== ""  }/>
+            <RHFSelect name="product_id" label="Product *" options={value.products || []}  disabled={currentRow?._id !== "" } />
             <RHFSelect name="financialAdvisor_id" label="Financial Advisor" options={value.advisors || []} />
             <RHFTextField name="date"  type="date" />
             <RHFTextField name="startTime"  type="time" />
             <RHFTextField name="endTime" type="time" />
-            <RHFSelect name="status" label="Status *" options={statuses} />
+            <RHFSelect name="status" label="Status *" options={statuses}  disabled={ currentRow?._id !== "" } />
           </Stack>
           <Stack direction="row" spacing={1} justifyContent="flex-end" p={3}>
             <Button onClick={handleClose}>Cancel</Button>
