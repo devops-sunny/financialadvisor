@@ -29,7 +29,7 @@ export default function AuthLoginForm() {
 
   const defaultValues = {
     email: 'demo@minimals.cc',
-    password: 'newPassword123',
+    password: 'password123',
   };
 
   const methods = useForm({
