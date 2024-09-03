@@ -41,11 +41,15 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
   try {
     const uniqueId = generateUniqueId("PR");
+    const images = req.body.image || []; 
     const productData = {
       ...req.body,
       Uniqueid: uniqueId,
+      images
     };
+
     const newProduct = await Product.create(productData);
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.ADDED,
@@ -58,11 +62,34 @@ exports.createProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
+    const { imagesToDelete, newImages, ...otherProductData } = req.body;
+
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    let updatedImages = product.images;
+    if (imagesToDelete && imagesToDelete.length > 0) {
+      updatedImages = updatedImages?.filter((img) => !imagesToDelete.includes(img));
+    }
+
+    if (newImages && newImages.length > 0) {
+      updatedImages = [...updatedImages, ...newImages];
+    }
+
+    const updateData = {
+      ...otherProductData,
+      images: updatedImages,
+    };
+
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      req.body,
-      { new: true }
+      updateData,
+      { new: true } 
     );
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.UPDATED,
@@ -72,6 +99,7 @@ exports.updateProduct = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 };
+
 
 exports.deleteProduct = async (req, res) => {
   try {

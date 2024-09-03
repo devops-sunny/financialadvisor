@@ -12,7 +12,7 @@ const initialValues = {
   name: '',
   description: '',
   status: '',
-  image: '',
+  image: [],
   categories_id: "",
   categories_title: "",
   details: '',
@@ -47,7 +47,7 @@ const Products = () => {
         name: item?.name,
         description: item?.description,
         status: item.status,
-        image: item?.image,
+        image: item?.images,
         categories_id:item?.category?._id,
         categories_title:item?.category?.name,
         details: item?.details,
@@ -57,6 +57,7 @@ const Products = () => {
       setProductData(formattedData);
     }
   }, [products]);
+
 
   const handleClose = () => {
     setIsModelOpen(false);

@@ -28,12 +28,10 @@ const statuses = [
 const ProductForm = ({ handleClose, currentRow }) => {
   const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
-  const [base64Image, setBase64Image] = useState('');
+  const [images, setImages] = useState([]);
+  const [imagesToDelete, setImagesToDelete] = useState([]);
 
   const categoryOptions = useSelector((state) => state.SubCategory.categories);
-
-  
-  
 
   const defaultValues = currentRow;
 
@@ -51,13 +49,11 @@ const ProductForm = ({ handleClose, currentRow }) => {
     dispatch(fetchSubCategories());
   }, [dispatch]);
 
-
-  useEffect(()=>{
-    if(defaultValues.image){
-        setBase64Image(defaultValues.image)
+  useEffect(() => {
+    if (defaultValues.image) {
+      setImages(defaultValues.image);
     }
-  },[defaultValues])
-
+  }, [defaultValues]);
 
   const methods = useForm({
     resolver: yupResolver(Schema),
@@ -66,33 +62,36 @@ const ProductForm = ({ handleClose, currentRow }) => {
 
   const { handleSubmit } = methods;
 
-  const handleFileChange = (e) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setBase64Image(reader.result);
+        setImages([...images, reader.result]);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const onSubmit = (data) => {
+  const deleteImage = (img, index) => {
+    setImagesToDelete([...imagesToDelete, img]);
+    const updatedImages = images.filter((_, i) => i !== index);
+    setImages(updatedImages);
+  };
 
+  const onSubmit = (data) => {
     const productData = {
       name: data.name,
       description: data.description,
       status: data.status,
       category: data.categories_id,
       details: data.details,
-      keywords: ["key1" ,"key2"] ||data.keywords,
-      image : base64Image
+      keywords: ['key1', 'key2'] || data.keywords,
+      image: images,
     };
 
-    console.log(data ,base64Image)
-
-
     if (data._id) {
+      productData.imagesToDelete = imagesToDelete
       dispatch(updateProduct(data._id, productData));
     } else {
       dispatch(addProduct(productData));
@@ -113,14 +112,19 @@ const ProductForm = ({ handleClose, currentRow }) => {
             <RHFSelect name="status" label="Status *" options={statuses} />
             <RHFSelect name="categories_id" label="Category *" options={categories} />
             <RHFTextField name="details" label="Details *" />
-            <input name="image" type="file" onChange={handleFileChange} />
+            <input name="image" type="file" onChange={handleImageUpload} />
 
-            {base64Image && (
-              <div>
-                <h3>Uploaded Image:</h3>
-                <img src={base64Image} alt="Uploaded" style={{ width: '200px', height: 'auto' }} />
-              </div>
-            )}
+            <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
+              {images.map((img, index) => (
+                <div key={index} style={{ margin: '10px' }}>
+                  <img src={img} alt={`img-${index}`} style={{ width: '100px', height: '100px' }} />
+                  <div>
+                  {currentRow._id &&  <Button onClick={() => deleteImage(img, index)}>Delete</Button>}
+                  </div>
+                </div>
+              ))}
+
+            </div>
           </Stack>
           <Stack direction="row" spacing={1} justifyContent="flex-end" p={3}>
             <Button onClick={handleClose}>Cancel</Button>
