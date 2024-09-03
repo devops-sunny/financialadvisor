@@ -56,11 +56,33 @@ exports.createFinancialAdvisor = async (req, res) => {
 
 exports.updateFinancialAdvisor = async (req, res) => {
   try {
+
+
     const updatedAdvisor = await FinancialAdvisor.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
+
+
+    const financialAdvisor = await FinancialAdvisor.findById(req.params.id);
+
+    if (!financialAdvisor) {
+      return res.status(404).json({ error: "FinancialAdvisor not found" });
+    }
+
+    const user = await User.findOne({ FinancialAdvisorid: financialAdvisor._id });
+    
+    if (user) {
+      const updatedUser = await User.findByIdAndUpdate(user._id, {
+        name: req.body.firstName,
+        email: req.body.email,
+      }, {
+        new: true,
+      });
+    } 
+
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.UPDATED,

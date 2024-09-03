@@ -63,7 +63,7 @@ const User = () => {
       width: 100,
       renderCell: ({ row }) => (
         <strong>
-          <Iconify icon="akar-icons:edit" onClick={handleEditClick(row)} />
+          {row.role !== "FinancialAdviser" && <Iconify icon="akar-icons:edit" onClick={handleEditClick(row)} /> }
           <Iconify icon="ant-design:delete-outlined" onClick={handleDeleteClick(row)} />
         </strong>
       ),
