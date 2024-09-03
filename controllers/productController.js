@@ -62,7 +62,8 @@ exports.createProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
-    const { imagesToDelete, newImages, ...otherProductData } = req.body;
+    const { imagesToDelete, image, ...otherProductData } = req.body;
+
 
     const product = await Product.findById(req.params.id);
 
@@ -71,12 +72,16 @@ exports.updateProduct = async (req, res) => {
     }
 
     let updatedImages = product.images;
+
+
     if (imagesToDelete && imagesToDelete.length > 0) {
       updatedImages = updatedImages?.filter((img) => !imagesToDelete.includes(img));
     }
 
-    if (newImages && newImages.length > 0) {
-      updatedImages = [...updatedImages, ...newImages];
+    if (image && image.length > 0) {
+      updatedImages = [...updatedImages, ...image];
+      updatedImages = await [...new Set(updatedImages)];
+    
     }
 
     const updateData = {

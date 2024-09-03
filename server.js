@@ -14,8 +14,8 @@ require("./config/globals");
 
 const path = require("path");
 
-app.use(bodyParser.json({ limit: '100mb' })); 
-app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+app.use(bodyParser.json({ limit: '1000mb' })); 
+app.use(bodyParser.urlencoded({ limit: '1000mb', extended: true }));
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(cors()); 
 app.use(express.json());

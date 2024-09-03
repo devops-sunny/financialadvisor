@@ -53,7 +53,7 @@ const ProductForm = ({ handleClose, currentRow }) => {
     if (defaultValues.image) {
       setImages(defaultValues.image);
     }
-  }, [defaultValues]);
+  }, [defaultValues.image]);
 
   const methods = useForm({
     resolver: yupResolver(Schema),
