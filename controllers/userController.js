@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs'); 
 const User = require("../models/userModel");
+const FinancialAdvisor = require("../models/financialAdvisorModel");
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -54,7 +55,19 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
+
+    const Users = await User.findById(req.params.id);
+    
+    const FinancialAdvisors = await FinancialAdvisor.findOne({ _id : Users.FinancialAdvisorid });
+
+    
+    if (FinancialAdvisors) {
+      await FinancialAdvisor.findByIdAndDelete(FinancialAdvisors._id);
+    } 
+
     await User.findByIdAndDelete(req.params.id);
+
+
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.DELETED,

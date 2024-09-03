@@ -73,12 +73,25 @@ exports.updateFinancialAdvisor = async (req, res) => {
 
 exports.deleteFinancialAdvisor = async (req, res) => {
   try {
+    const financialAdvisor = await FinancialAdvisor.findById(req.params.id);
+    
+    if (!financialAdvisor) {
+      return res.status(404).json({ error: "FinancialAdvisor not found" });
+    }
+
+    const user = await User.findOne({ FinancialAdvisorid: financialAdvisor._id });
+    
+    if (user) {
+      await User.findByIdAndDelete(user._id);
+    } 
+
     await FinancialAdvisor.findByIdAndDelete(req.params.id);
+    
     return res.handler.response(
       STATUS_CODES.SUCCESS,
       STATUS_MESSAGES.REQUEST.DELETED,
     );
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
