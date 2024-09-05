@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { DialogAnimate } from '../../components/animate';
-import { RHFTextField } from '../../components/hook-form';
+import {  RHFTextField } from '../../components/hook-form';
 import FormProvider from '../../components/hook-form/FormProvider';
 import { updateTerms, addTerms } from '../../redux/Terms/actions';
 
