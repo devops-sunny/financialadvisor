@@ -11,8 +11,12 @@ const Loadable = (Component) => (props) =>
     </Suspense>
   );
 
+
+
+
 // ----------------------------------------------------------------------
 
+export const GeneralAppPage = Loadable(lazy(() => import('../pages/GeneralAppPage')));
 export const LoginPage = Loadable(lazy(() => import('../pages/LoginPage')));
 export const SubCategoryPage = Loadable(lazy(() => import('../pages/SubCategoryPage')));
 export const CategoryPage = Loadable(lazy(() => import('../pages/CategoryPage')));

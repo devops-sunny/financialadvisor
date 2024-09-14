@@ -23,7 +23,8 @@ import {
   FaqsPage,
   Contact,
   AboutPage,
-  HomePage
+  HomePage,
+  GeneralAppPage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -67,6 +68,7 @@ export default function Router() {
               element: <Navigate to="/dashboard/user/SubCategory" replace />,
               index: true,
             },
+            { path: 'app', element: <GeneralAppPage /> },
             { path: 'SubCategory', element: <SubCategoryPage /> },
             { path: 'Category', element: <CategoryPage /> },
             { path: 'Faq', element: <FaqPage /> },
