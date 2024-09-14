@@ -1,8 +1,10 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // auth
+
 // layouts
 import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
+import MainLayout from '../layouts/main/MainLayout';
 
 import {
   LoginPage,
@@ -17,7 +19,11 @@ import {
   FinancialAdvisorsPage,
   ProductsPage,
   AppointmentsPage,
-  AppointmentsFinancialAdviserPage
+  AppointmentsFinancialAdviserPage,
+  FaqsPage,
+  Contact,
+  AboutPage,
+  HomePage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -95,6 +101,20 @@ export default function Router() {
         },
       ],
     },
+
+
+  
+      // Main Routes
+      {
+        element: <MainLayout />,
+        children: [
+          { element: <HomePage />, index: true },
+          { path: 'about-us', element: <AboutPage /> },
+          { path: 'contact-us', element: <Contact /> },
+          { path: 'faqs', element: <FaqsPage /> },
+        ],
+      },
+
     {
       element: <CompactLayout />,
       children: [{ path: '404', element: <Page404 /> }],
