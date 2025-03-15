@@ -57,7 +57,7 @@ const Header = () => {
 
             {/* Right Section - Button */}
             <div className="ak-main-header-right">
-              <Link to="/contact" className="common-btn">
+              <Link to="/register" className="common-btn">
                 <span> Get Started</span>
                 <span>
                   <svg
