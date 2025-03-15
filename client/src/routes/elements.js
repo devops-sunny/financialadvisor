@@ -37,9 +37,18 @@ export const AppointmentsFinancialAdviserPage = Loadable(lazy(() => import('../p
 
 
 // ----------------------------------------------------------------------
-
-export const HomePage = Loadable(lazy(() => import('../pages/HomePage')));
 export const FaqsPage = Loadable(lazy(() => import('../pages/FaqsPage')));
-export const AboutPage = Loadable(lazy(() => import('../pages/AboutPage')));
-export const Contact = Loadable(lazy(() => import('../pages/ContactPage')));
 
+// export const HomePage = Loadable(lazy(() => import('../pages/HomePage')));
+// export const AboutPage = Loadable(lazy(() => import('../pages/AboutPage')));
+// export const Contact = Loadable(lazy(() => import('../pages/ContactPage')));
+
+
+
+
+
+export const Contact = Loadable(lazy(() => import('../pageshome/ContactPage/Contact')));
+export const HomePage = Loadable(lazy(() => import('../pageshome/HomePage')));
+export const AboutPage = Loadable(lazy(() => import('../pageshome/AboutPage/About')));
+export const Services = Loadable(lazy(() => import('../pageshome/Services/Services')));
+export const Servicedetails = Loadable(lazy(() => import('../pageshome/Service-Details/ServiceDetails')));

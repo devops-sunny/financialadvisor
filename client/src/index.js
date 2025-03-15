@@ -1,3 +1,6 @@
+import "../src/assets/css/plugins/bootstrap.min.css";
+import "../src/assets/css/plugins/swiper.min.css";
+import "../src/assets/css/style.css";
 import ReactDOM from 'react-dom/client';
 import App from './App';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';

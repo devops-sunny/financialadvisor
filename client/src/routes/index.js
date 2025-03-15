@@ -24,7 +24,9 @@ import {
   Contact,
   AboutPage,
   HomePage,
-  GeneralAppPage
+  GeneralAppPage,
+  Services,
+  Servicedetails
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -108,15 +110,14 @@ export default function Router() {
   
       // Main Routes
       {
-        element: <MainLayout />,
         children: [
           { element: <HomePage />, index: true },
-          { path: 'about-us', element: <AboutPage /> },
-          { path: 'contact-us', element: <Contact /> },
+          { path: 'about', element: <AboutPage /> },
+          { path: 'contact', element: <Contact /> },
           { path: 'faqs', element: <FaqsPage /> },
+          { path: 'services', element: <Services /> },
         ],
       },
-
     {
       element: <CompactLayout />,
       children: [{ path: '404', element: <Page404 /> }],
