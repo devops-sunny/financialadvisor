@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React from 'react'
 import IMG4 from "../../assets/img/contact/contact-img.png";
+import { addfeedbackData } from 'src/services/Feedback';
 
 const AboutContact = () => {
 
@@ -9,8 +10,14 @@ const AboutContact = () => {
     
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-  
-    console.log("Form Data:", data);
+    try {
+      const response = addfeedbackData(data);
+      e.target.reset();
+      console.log("✅ Data sent successfully:", response.data);
+    } catch (error) {
+      e.target.reset();
+      console.error("❌ Error sending data:", error);
+    }
   };
   return (
     <>
@@ -46,7 +53,7 @@ const AboutContact = () => {
               <div className="type_1">
                 <label for="YourPhone" className="form-label">Your Phone</label>
                 <input
-                  type="tel"
+                  type="number"
                   name="phone"
                   id="YourPhone"
                   className="csame"

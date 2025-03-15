@@ -29,6 +29,10 @@ export const UserPage = Loadable(lazy(() => import('../pages/UserPage')));
 export const FinancialAdvisorsPage = Loadable(lazy(() => import('../pages/FinancialAdvisorsPage')));
 export const ProductsPage = Loadable(lazy(() => import('../pages/ProductsPage')));
 export const AppointmentsPage = Loadable(lazy(() => import('../pages/AppointmentsPage')));
+export const FeedbackPage = Loadable(lazy(() => import('../pages/FeedbackForm')));
+
+
+
 
 
 // ----------------------------------------------------------------------

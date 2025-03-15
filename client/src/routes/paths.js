@@ -50,6 +50,7 @@ export const PATH_DASHBOARD = {
     FinancialAdvisors: path(ROOTS_DASHBOARD, '/user/FinancialAdvisors'),
     Products: path(ROOTS_DASHBOARD, '/user/Products'),
     Appointments: path(ROOTS_DASHBOARD, '/user/Appointments'),
+    FeedbackPage:path(ROOTS_DASHBOARD, '/user/FeedbackPage'),
   },
  };
 

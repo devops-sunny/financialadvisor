@@ -26,7 +26,8 @@ import {
   HomePage,
   GeneralAppPage,
   Services,
-  Servicedetails
+  Servicedetails,
+  FeedbackPage
 } from './elements';
 import PublicRoutes from '../Routing/PublicRoutes';
 import RoleBasedRoute from '../Routing/RoleBasedRoute';
@@ -79,6 +80,7 @@ export default function Router() {
             { path: 'User', element: <UserPage /> },
             { path: 'FinancialAdvisors', element: <FinancialAdvisorsPage /> },
             { path: 'Products', element: <ProductsPage /> },
+            { path: 'FeedbackPage', element: <FeedbackPage /> },  
             { path: 'Appointments', element: <AppointmentsPage /> }
           ],
         },

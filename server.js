@@ -45,7 +45,9 @@ const meetingRoutes = require('./routes/meetingRoutes');
 const faqRoutes = require('./routes/faqRoutes');
 const termsConditionsRoutes = require('./routes/termsConditionsRoutes');
 const privacyPolicyRoutes = require('./routes/privacyPolicyRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 const ResponseHandler = require("./config/responseHandler");
+
 
 
 
@@ -85,6 +87,8 @@ app.use('/api/meetings', meetingRoutes);
 app.use('/api/faq', faqRoutes);
 app.use('/api/terms', termsConditionsRoutes);
 app.use('/api/privacy', privacyPolicyRoutes);
+app.use('/api/feedback', feedbackRoutes);
+
 
 if (process.env.NODE_ENV === "production") {
   app.use("/", express.static("client/build"));

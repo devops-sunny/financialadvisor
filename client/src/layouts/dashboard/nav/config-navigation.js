@@ -44,8 +44,8 @@ const navConfig = [
           { title: 'User', path: PATH_DASHBOARD.user.User },
           { title: 'FinancialAdvisors', path: PATH_DASHBOARD.user.FinancialAdvisors },
           { title: 'Products', path: PATH_DASHBOARD.user.Products },
-          { title: 'Appointmentsoduct', path: PATH_DASHBOARD.user.Appointments }
-
+          { title: 'Appointmentsoduct', path: PATH_DASHBOARD.user.Appointments },
+          { title: 'FeedbackPage', path: PATH_DASHBOARD.user.FeedbackPage }
         ],
       },
     ],
